@@ -67,6 +67,8 @@ defmodule Commanded.EventStore.Adapters.Extreme.EventPublisher do
   @impl GenServer
   def handle_info(_msg, state), do: {:noreply, state}
 
+  defp process_push(%{event_type: "$>"}, _), do: :ok
+
   defp process_push(push, state) do
     %State{serializer: serializer, pubsub: pubsub} = state
 
